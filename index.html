@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container center">
+            <h1 align="center">
+                <b>Mission to Mars</b>
+            </h1>            
+            <p align="center"><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+
+        <div class="container position">
+            <div class="row">
+                <div class="col-md-12 h-100 w-100">
+                    <article class="description-content">
+                        <h2 class="center">
+                            <b>Latest Mars News</b>
+                        </h2>
+                        <h4>{{mars.news_title}}</h4>
+                        <h5>{{mars.news_paragraph}}</h5>
+                        <hr />
+                    </article>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>
+                        <b>Featured Mars Image</b>
+                    </h3>
+                    <figure class="figure">
+                        <img src="{{mars.featured_image_url}}" width="700" height="500" class="figure-img img-fluid rounded"
+                            alt="A generic square placeholder image with rounded corners in a figure.">
+                        <figcaption class="figure-caption">{{mars.featured_image_title}}</figcaption>
+                    </figure>
+                    <!-- <h6>{{mars.featured_image_title}}</h6> -->
+                    <!-- <img src="{{mars.featured_image_url}}" alt="" class="description-img" /> -->
+                </div>
+                <div class="col-md-4">
+                    <!-- <div class="panel-default"> -->
+                    <div class="panel-body">
+                        <h3><b>Current Weather on Mars</b></h3>
+                        <h6>{{mars.mars_weather}}</h6>
+                    </div>                   
+                    <div>
+                        <h3><b>Mars Facts</b></h3>
+                        <table class="table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in mars.space_table %}
+                                <tr>
+                                    <td>{{ row }}</td>
+                                    <td>{{ mars.space_table[row] }}</td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>                        
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h3 align="center">
+                    <b>Mars Hemispheres</b>
+                </h3>
+                <div class="container position">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <img src="{{mars.valles_marineris_hemisphere_image}}" width="500" alt="" class="description-img" />
+                            <h4>{{mars.valles_marineris_hemisphere_title}}</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <img src="{{mars.cerberus_hemisphere_image}}" width="500" alt="" class="description-img" />
+                            <h4>{{mars.cerberus_hemisphere_title}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <img src="{{mars.schiaparelli_hemisphere_image}}" width="500" alt="" class="description-img" />
+                            <h4>{{mars.schiaparelli_hemisphere_title}}</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <img src="{{mars.syrtis_major_hemisphere_image}}" width="500" alt="" class="description-img" />
+                            <h4>{{mars.syrtis_major_hemisphere_title}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
