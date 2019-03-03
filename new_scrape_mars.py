@@ -11,30 +11,27 @@ def init_browser():
     return Browser('chrome', **executable_path, headless=False)
 
 def scrape():
-    browser = init_browser()
-
+   
     mars_dict = {}
 
     nasa_url = ("https://mars.nasa.gov/news/")
-    # browser.visit(nasa_url)
-    # html = browser.html
-
-    nasa_response = requests.get(nasa_url)
-    nasa_soup = bs(nasa_response.text, "html.parser") 
+    browser = init_browser()
+    browser.visit(nasa_url)
+    
+    
+    html = browser.html   
+    # nasa_response = requests.get(nasa_url)
+    nasa_soup = bs(html, "html.parser") 
 
     news_title = nasa_soup.find('div', class_ = 'content_title').text.strip()
     news_paragraph = nasa_soup.find('div', class_ = 'rollover_description_inner').text.strip()
-
-    # news_title = nasa_soup.find('div', class_ = 'master-slider')
-    # news_paragraph = nasa_soup.find('div', class_ = 'description').text.strip()
-
+    
     mars_dict["news_title"] = news_title
     mars_dict["news_paragraph"] = news_paragraph
 
 # ---------------------------------------------------------------------
     
     nasa_image_url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
-    browser = init_browser()
     browser.visit(nasa_image_url)
 
     html = browser.html
@@ -69,7 +66,7 @@ def scrape():
     twitter_soup = bs(twitter_response.text, "html.parser")
 
     mars_weather = twitter_soup.find_all('p', class_='TweetTextSize TweetTextSize--normal js-tweet-text tweet-text')
-    mars_dict["mars_weather"] = mars_weather[2].text
+    mars_dict["mars_weather"] = mars_weather[0].text
 
 # -----------------------------------------------------------------------
     
